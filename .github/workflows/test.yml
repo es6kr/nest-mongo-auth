@@ -1,0 +1,30 @@
+name: Run Unit Tests
+on:
+  push:
+    branches:
+      - master
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: Set up Node.js
+        uses: actions/setup-node@master
+        with:
+          node-version: 16.x
+      - name: Cache node_modules
+        uses: actions/cache@v2
+        with:
+          path: node_modules
+          key: test-${{ runner.OS }}-${{ hashFiles('**/package.json') }}
+          restore-keys: |
+            test-${{ runner.OS }}
+      - name: Install dependencies
+        run: yarn install
+      - name: Create env file
+        run: |
+          jq -r 'to_entries|map("\(.key)=\(.value|tostring)")|.[]' <<< "$SECRETS_CONTEXT" > .env
+        env:
+          SECRETS_CONTEXT: ${{ toJson(secrets) }}
+      - name: Run All Tests
+        run: yarn test
