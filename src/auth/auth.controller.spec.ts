@@ -25,9 +25,9 @@ describe('AuthController', () => {
 
     controller = module.get(AuthController);
     service = module.get(UsersService);
-    return () => {
-      service.deleteOne({ username: testUser.username });
-      module.close();
+    return async () => {
+      await service.deleteOne({ username: testUser.username });
+      await module.close();
     };
   });
 
@@ -37,6 +37,7 @@ describe('AuthController', () => {
 
   it('register()', async () => {
     let user = await controller.register(testUser);
-    expect(user).toMatchSnapshot('registeredUser');
+    expect(user.username).toEqual(testUser.username);
+    expect(user.email).toEqual(testUser.email);
   });
 });

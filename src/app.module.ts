@@ -7,7 +7,6 @@ import { AuthModule } from './auth';
 @Module({
   /* prettier-ignore */
   imports: [
-    AuthModule,
     RouterModule.register([{
       path: 'auth',
       module: AuthModule,
