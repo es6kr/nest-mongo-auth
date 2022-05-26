@@ -13,6 +13,11 @@ interface User {
 }
 
 declare module 'mongoose' {
+  interface AuthenticationError {
+    name: string;
+    message: string;
+  }
+
   interface AuthenticateMethod<T> {
     (username: string, password: string): Promise<AuthResult<T>>;
     (
@@ -24,6 +29,6 @@ declare module 'mongoose' {
 
   interface AuthResult<T> extends AuthenticationResult {
     user: T;
-    error: any;
+    error: AuthenticationError;
   }
 }

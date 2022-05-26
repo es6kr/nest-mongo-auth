@@ -7,7 +7,7 @@ const UserSchema = new Schema<User>({
 });
 
 UserSchema.plugin(passportLocalMongoose, {
-  selectFields: ['email'],
+  selectFields: ['email', 'username'],
   usernameQueryFields: ['email', 'username'],
 });
 
