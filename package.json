@@ -23,6 +23,7 @@
     "@nestjs/mongoose": "^9.1.0",
     "@nestjs/passport": "^8.2.1",
     "@nestjs/platform-express": "^8.0.0",
+    "@types/http-errors": "^1.8.2",
     "http-errors": "^2.0.0",
     "mongoose": "^6.3.4",
     "passport": "^0.6.0",
@@ -68,9 +69,11 @@
       "^.+\\.(t|j)s$": "ts-jest"
     },
     "collectCoverageFrom": [
-      "**/*.(t|j)s",
-      "!src/app.module.ts",
-      "!src/main.ts"
+      "**/*.(t|j)s"
+    ],
+    "coveragePathIgnorePatterns": [
+      ".module.ts$",
+      "main.ts$"
     ],
     "coverageDirectory": "../coverage",
     "testEnvironment": "node"

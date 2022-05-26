@@ -1,11 +1,10 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import '../../test/support';
 import { DatabaseModule } from '../database/database.module';
-import { CreateUserDto } from './users.dto';
 import { usersProviders } from './users.proviers';
 import { UsersService } from './users.service';
 
-const testUser: CreateUserDto = {
+const testUser: User = {
   username: 'test',
   password: 'P@ssw0rd',
   email: 'test@test.com',

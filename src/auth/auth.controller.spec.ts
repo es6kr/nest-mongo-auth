@@ -4,6 +4,7 @@ import '../../test/support';
 import { UsersModule } from '../users/users.module';
 import { UsersService } from '../users/users.service';
 import { RegisterDto } from './auth.dto';
+import createError = require('http-errors');
 
 const testUser: RegisterDto = {
   username: 'authtest',
@@ -39,5 +40,9 @@ describe('AuthController', () => {
     let user = await controller.register(testUser);
     expect(user.username).toEqual(testUser.username);
     expect(user.email).toEqual(testUser.email);
+
+    const failingAsyncTest = async () =>
+      await controller.register({ ...testUser, password2: 'test' });
+    await expect(failingAsyncTest()).rejects.toThrow(createError.HttpError);
   });
 });
