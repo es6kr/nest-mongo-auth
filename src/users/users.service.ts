@@ -2,7 +2,7 @@ import { Inject, Injectable } from '@nestjs/common';
 import {
   AuthenticateMethod,
   HydratedDocument,
-  PassportLocalModel
+  PassportLocalModel,
 } from 'mongoose';
 import 'passport-local-mongoose';
 

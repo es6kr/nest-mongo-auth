@@ -34,20 +34,20 @@ describe('UsersService', () => {
   });
 
   it('findOne()', async () => {
-    let { email, username } = testUser;
+    const { email, username } = testUser;
     user = (await service.findOne({ username })).toObject();
     expect(user.email).toEqual(email);
     expect(user.username).toEqual(username);
   });
 
   it('authenticate()', async () => {
-    let { username, password } = testUser;
-    let result = await service.authenticate(username, password);
+    const { username, password } = testUser;
+    const result = await service.authenticate(username, password);
     expect(result.user.email).toEqual(user.email);
   });
 
   it('deleteOne()', async () => {
-    let { deletedCount } = await service.deleteOne(user);
+    const { deletedCount } = await service.deleteOne(user);
     expect(deletedCount).toEqual(1);
   });
 });

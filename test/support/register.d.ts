@@ -1,11 +1,11 @@
 type Promisable<T> = T | Promise<T>;
 type Close = () => Promisable<any>;
 
-declare var buildModule: (
+declare let buildModule: (
   init: () => Promisable<INestApplicationContext>,
 ) => void;
 
-declare var register: (init: () => Promisable<Close>) => void;
+declare let register: (init: () => Promisable<Close>) => void;
 
 interface Closable {
   close: Close;
