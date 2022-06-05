@@ -1,8 +1,14 @@
 import { INestApplication } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
+import { LoginDto } from 'src/auth/auth.dto';
 import request from 'supertest';
-import '../../test/support';
 import { AppModule } from './../src/app.module';
+import './support';
+
+const testLogin: LoginDto = {
+  username: 'e2etest',
+  password: 'P@ssw0rd',
+};
 
 describe('AppController (e2e)', () => {
   let app: INestApplication;
@@ -14,7 +20,7 @@ describe('AppController (e2e)', () => {
 
     app = moduleFixture.createNestApplication();
     await app.init();
-    return () => app.close();
+    return async () => await app.close();
   });
 
   it('/ (GET)', () => {
@@ -22,5 +28,12 @@ describe('AppController (e2e)', () => {
       .get('/')
       .expect(200)
       .expect('Hello World!');
+  });
+
+  it('/auth/login (POST) fail', () => {
+    return request(app.getHttpServer())
+      .post('/auth/login')
+      .send({ ...testLogin, password: 'wrong' })
+      .expect(400);
   });
 });

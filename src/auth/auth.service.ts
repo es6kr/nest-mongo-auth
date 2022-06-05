@@ -8,14 +8,7 @@ export class AuthService {
   constructor(private usersService: UsersService) {}
 
   async login(user: LoginDto) {
-    const result = await this.usersService.authenticate(
-      user.username,
-      user.password,
-    );
-    if (result.error) {
-      throw new createError.BadRequest(result.error.message);
-    }
-    return result.user.toObject();
+    return this.validateUser(user?.username, user?.password);
   }
 
   async register(registerDto: User): Promise<User> {
@@ -28,7 +21,10 @@ export class AuthService {
     username: string,
     password: string,
   ): Promise<User | undefined> {
-    const { user } = await this.usersService.authenticate(username, password);
-    return user.toObject({ flattenMaps: true });
+    const result = await this.usersService.authenticate(username, password);
+    if (result.error) {
+      throw new createError.BadRequest(result.error.message);
+    }
+    return result.user.toObject({ flattenMaps: true });
   }
 }

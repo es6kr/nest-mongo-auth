@@ -3,9 +3,9 @@
   "configurations": [
     {
       "console": "integratedTerminal",
-      "name": "Yarn Test",
+      "name": "test:e2e",
       "request": "launch",
-      "runtimeArgs": ["test"],
+      "runtimeArgs": ["test:e2e"],
       "runtimeExecutable": "yarn",
       "skipFiles": ["<node_internals>/**"],
       "type": "node"
