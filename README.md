@@ -1,5 +1,7 @@
 # Nest Mongo Auth
 
+[![npm](https://img.shields.io/npm/l/@nestjs/core.svg?sanitize=true)](https://opensource.org/licenses/MIT)
+
 ## Description
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript template with Mongoose and Passport
